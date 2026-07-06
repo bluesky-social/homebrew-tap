@@ -31,12 +31,29 @@ class GhPrivateReleaseStrategy < CurlDownloadStrategy
 
   private
 
+  # Homebrew sanitizes PATH during fetch, so `which` cannot see
+  # /opt/homebrew/bin even when gh is installed. Probe known install
+  # locations directly. Note `depends_on "gh"` does NOT guarantee gh at
+  # fetch time either — brew fetches all downloads before installing any
+  # dependency — so gh must be preinstalled (README step 1).
+  def find_gh
+    candidates = [
+      "#{HOMEBREW_PREFIX}/bin/gh",
+      "/opt/homebrew/bin/gh",
+      "/usr/local/bin/gh",
+    ]
+    found = candidates.find { |p| File.executable?(p) }
+    found || which("gh")&.to_s
+  end
+
   def _fetch(url:, resolved_url:, timeout:)
-    gh = which("gh")
+    gh = find_gh
     unless gh
       raise CurlDownloadStrategyError, <<~EOS
         The GitHub CLI (gh) is required to download #{@owner}/#{@repo} release
-        assets. Install it first: brew install gh
+        assets, and must be installed BEFORE this formula (brew fetches
+        downloads before installing dependencies). Run:
+          brew install gh && gh auth login
       EOS
     end
 
