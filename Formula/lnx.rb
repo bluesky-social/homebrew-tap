@@ -8,7 +8,10 @@ class Lnx < Formula
   homepage "https://github.com/bluesky-social/platform"
   version "0.2.2"
 
-  depends_on "gh"
+  # No depends_on "gh": brew fetches downloads BEFORE installing deps, so a
+  # gh dependency can't satisfy the download strategy anyway — the strategy
+  # raises its own actionable "install gh first" error at fetch time. Leaving
+  # it out also avoids coupling installs to gh's upgrade cadence.
 
   on_macos do
     if Hardware::CPU.arm?
