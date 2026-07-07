@@ -36,6 +36,12 @@ always the truth; `brew list --versions` only describes the seed.
 
 ## Troubleshooting
 
+- `brew tap` fails with "configured for Git LFS but 'git-lfs' was not
+  found" → this repo has no LFS content; the error is a global
+  `core.hooksPath` git-lfs hook firing inside brew's sanitized-PATH git.
+  Fix: add `export PATH="/opt/homebrew/bin:$PATH"` at the top of the
+  `post-checkout` and `post-merge` hooks in your global hooks dir
+  (`git config --global core.hookspath`), then retry.
 - Anything wrong → `<tool> doctor` first. It checks the binary,
   telemetry config, tokens, and connectivity, and tells you the fix.
 - `gh` errors during install → `gh auth login`, then retry.
