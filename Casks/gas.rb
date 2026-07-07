@@ -13,8 +13,12 @@ cask "gas" do
     private
 
     def _fetch(url:, resolved_url:, timeout:)
-      gh = ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
-           .find { |p| File.executable?(p) } || which("gh")&.to_s
+      # Brew sanitizes PATH during fetch but preserves the user's
+      # original PATH in HOMEBREW_PATH — search that first so gh is
+      # found wherever it's installed (brew, nix, ~/bin, ...).
+      candidates = (ENV["HOMEBREW_PATH"] || "").split(":").map { |d| File.join(d, "gh") }
+      candidates += ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
+      gh = candidates.find { |p| File.executable?(p) } || which("gh")&.to_s
       unless gh
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
@@ -34,16 +38,16 @@ cask "gas" do
     end
   end
 
-  version "0.2.8"
+  version "0.2.9"
 
   on_macos do
     on_intel do
-      sha256 "56048034ebbcc6005fbb43d4ca4ed9d089d95f86ef829da3abb51afbb3f2f0b4"
+      sha256 "d2137159e66c4e5b958b62cb2068c2c29aa1182c820d5a6ef2ea29c910fc90f2"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "7e29f2f8d8ce8536118533a4c7ecc23c1fbd3b0fb2ff616379273c3c1fcaca73"
+      sha256 "e970c5175cab559632e60f405d99851e0ee98996e007ed8125320b1dd3b9668f"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -51,12 +55,12 @@ cask "gas" do
 
   on_linux do
     on_intel do
-      sha256 "47c70e532c1d4a4e06d67c38b190946eaae451bfb243e7cebbec6e18affda154"
+      sha256 "51a095668f0fbcb38e04bbd2a4296e56b705e57e5655c6d64e41c101fdbbcea4"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "3c4806f1d987ae7171562201927e3ffe60378e33d0b6cabce52a32b4d4055fd2"
+      sha256 "c40fc70133796038968196aab6f33e3686c0eb0acce24401470d06a99426b635"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
