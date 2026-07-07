@@ -10,26 +10,34 @@ Private Homebrew tap for internal CLI tools.
 brew install gh && gh auth login && gh auth setup-git
 
 brew tap bluesky-social/tap
-brew install --cask lnx    # Linear CLI
+brew install --cask lnx nbx gas        # platform tools
+brew install --cask slagctl skipper diderot  # server-admin CLIs, as needed
 ```
 
-Then authenticate the tool itself (each owns its login flow):
+Then authenticate each tool (each owns its login flow) and check it:
 
-| Tool | First-run auth |
-|---|---|
-| lnx | `lnx login` (Linear API key, browser flow) |
+| Tool | What it is | First-run auth | Health check |
+|---|---|---|---|
+| lnx | Linear CLI | `lnx login` (browser to Linear API-key page) | `lnx doctor` |
+| nbx | NetBox CLI | `nbx login` (browser to NetBox token page) | `nbx doctor` |
+| gas | NetBox-backed SSH/IPMI tool | none — shares nbx's token | `gas doctor` |
+| slagctl | Slagworks provisioning CLI | `slagctl auth login` (Authentik SSO) | `slagctl doctor` |
+| skipper | Slack ops bot admin CLI | `skipper auth login` (Authentik SSO) | `skipper doctor` |
+| diderot | Events store + retrieval CLI | `diderot auth login` (Authentik SSO) | `diderot doctor` |
 
 ## Updates
 
 Installed binaries **self-update** in the background within ~24h of a
 release — you do not need `brew upgrade`. On first self-update the
 live binary moves to `~/.local/bin` (which shadows brew's bin on
-PATH); the brew-installed copy remains as an inert seed after that.
-`<tool> --version` is always the truth; `brew list --versions` only
-describes the seed.
+PATH); the brew-installed copy remains as an inert seed after that,
+and the tool tells you once when this happens. `<tool> --version` is
+always the truth; `brew list --versions` only describes the seed.
 
 ## Troubleshooting
 
+- Anything wrong → `<tool> doctor` first. It checks the binary,
+  telemetry config, tokens, and connectivity, and tells you the fix.
 - `gh` errors during install → `gh auth login`, then retry.
 - Design + rationale: claude-meta `docs/plans/2026-07-06-tool-installer.md`.
 
