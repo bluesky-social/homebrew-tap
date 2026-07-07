@@ -13,8 +13,12 @@ cask "diderot" do
     private
 
     def _fetch(url:, resolved_url:, timeout:)
-      gh = ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
-           .find { |p| File.executable?(p) } || which("gh")&.to_s
+      # Brew sanitizes PATH during fetch but preserves the user's
+      # original PATH in HOMEBREW_PATH — search that first so gh is
+      # found wherever it's installed (brew, nix, ~/bin, ...).
+      candidates = (ENV["HOMEBREW_PATH"] || "").split(":").map { |d| File.join(d, "gh") }
+      candidates += ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
+      gh = candidates.find { |p| File.executable?(p) } || which("gh")&.to_s
       unless gh
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
@@ -34,16 +38,16 @@ cask "diderot" do
     end
   end
 
-  version "0.1.2"
+  version "0.1.3"
 
   on_macos do
     on_intel do
-      sha256 "0e94069eadf4448423bf68d436672ba9b631fdfe60580443840d30f3404537ab"
+      sha256 "7197f4da9e41ab8ddf6ceb0cd1d54fa7f62a6925a733ce4bdb13a418008f95b5"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "ed080bc3436367af6d864e9a703349555d8a67b050677ec5a29c3a1cb4da605c"
+      sha256 "a1875a7fcf9ead926bcd01241da2889639b36181a2eefb073f113ee29449191f"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -51,12 +55,12 @@ cask "diderot" do
 
   on_linux do
     on_intel do
-      sha256 "52341b799d6fe7d3414fbb2c1d265d37cd64b4ff9a129083c23cdef58d243fd2"
+      sha256 "95a535a659b6ea3f0224f25cab16431e99b8284192596d141996229c0a55d8ab"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "6897761cb0f74340ef59159bde8d084d1d71f241c0bf8846c2e754bd49206a72"
+      sha256 "15b6ce7dcf4783fea679a9c8195b014e754d632cea7f350d7322c3be840f602f"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
