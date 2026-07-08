@@ -13,8 +13,12 @@ cask "skipper" do
     private
 
     def _fetch(url:, resolved_url:, timeout:)
-      gh = ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
-           .find { |p| File.executable?(p) } || which("gh")&.to_s
+      # Brew sanitizes PATH during fetch but preserves the user's
+      # original PATH in HOMEBREW_PATH — search that first so gh is
+      # found wherever it's installed (brew, nix, ~/bin, ...).
+      candidates = (ENV["HOMEBREW_PATH"] || "").split(":").map { |d| File.join(d, "gh") }
+      candidates += ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
+      gh = candidates.find { |p| File.executable?(p) } || which("gh")&.to_s
       unless gh
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
@@ -34,16 +38,16 @@ cask "skipper" do
     end
   end
 
-  version "0.1.2"
+  version "0.1.3"
 
   on_macos do
     on_intel do
-      sha256 "f8d447af50d077bf985eb8a077dc88b4e349f2a49dd044378520ed2616ee7898"
+      sha256 "4cf106b021bdded2621ca7d50281cc878edeae252048db756aa135efb3d9c9c9"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "1fb4298fc29f87c45f89c6906e4b2403adc2054af2c2bf49afd6cdf5cef72b06"
+      sha256 "5054c3080bb9e0f4174204dffd5905ad0c31d9480506d773fa5274e7c8818cad"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -51,12 +55,12 @@ cask "skipper" do
 
   on_linux do
     on_intel do
-      sha256 "1c25cbf35826eed0c7a0ffbc49a944bdb2335fb7fc474deca7a14026f5239e5a"
+      sha256 "4d423829d7b3361fad67e2a5bcebbf7d4bafd5738e30fbbf5ed21f2d66b83545"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "11f524070f25c31a5f49232f6acc9a10fb30898faee34fa6aaa012f31e2ec65b"
+      sha256 "8e615c0e11f2785e4cefc4242918d68888294687583c317fcf3a475dc526b4fa"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
