@@ -38,16 +38,16 @@ cask "lnx" do
     end
   end
 
-  version "0.2.10"
+  version "0.2.11"
 
   on_macos do
     on_intel do
-      sha256 "b6b480dda22bd70715bd041a4378d51b06e6c5fec7692beca4e4654d5e42045d"
+      sha256 "a8960db1551291b6b38fad07220b4596cc747119b08b4ed6d5d69b290cacee34"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "069c5a7caac3ed46fd419aaf4525b691f0839f7493aeb358a9b4bbb7f1548ec0"
+      sha256 "98f7d351550c7d57a54597c2579b1e54a1f2941218d08c3b7f6ae9310a4319cb"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -55,12 +55,12 @@ cask "lnx" do
 
   on_linux do
     on_intel do
-      sha256 "1563a4503d558c0414bffddfc239592a03314c2d293bfd18a59416ac23e93b12"
+      sha256 "17da3de18948780e588acf4c4cc5b749a3052b199facf330006f9dce87f2045a"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "c5ae55ef8da1ca3158db915673b10760dd06f1163503718b3a15a4366985b064"
+      sha256 "9960a86ac557102c25506d42d380b20d99f23e933acf4eb0c712c8226215dd72"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -84,4 +84,8 @@ cask "lnx" do
 
   # No zap stanza required
 
+  caveats <<~EOS
+    To install the Claude Code skill (optional):
+      lnx skill install
+  EOS
 end
