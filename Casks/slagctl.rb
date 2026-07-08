@@ -13,8 +13,12 @@ cask "slagctl" do
     private
 
     def _fetch(url:, resolved_url:, timeout:)
-      gh = ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
-           .find { |p| File.executable?(p) } || which("gh")&.to_s
+      # Brew sanitizes PATH during fetch but preserves the user's
+      # original PATH in HOMEBREW_PATH — search that first so gh is
+      # found wherever it's installed (brew, nix, ~/bin, ...).
+      candidates = (ENV["HOMEBREW_PATH"] || "").split(":").map { |d| File.join(d, "gh") }
+      candidates += ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
+      gh = candidates.find { |p| File.executable?(p) } || which("gh")&.to_s
       unless gh
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
@@ -34,16 +38,16 @@ cask "slagctl" do
     end
   end
 
-  version "0.1.3"
+  version "0.1.4"
 
   on_macos do
     on_intel do
-      sha256 "51e2bbdd807fc05885753bf9af9606b282d899d3916d9c91ba8f4dbe469440a3"
+      sha256 "985dd598db758fd7d7cb7502f96acd48c886ea9366b9ae1e49cffc54247d84f0"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "af936b31f3c9f60498e97c1c895824f14f0f5bb7e5a463efa061c9e86e0f850b"
+      sha256 "36fe1860d97dbe20410f995c33fe21ad36fe30fd6271e38a56713e8a5f9afc84"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -51,12 +55,12 @@ cask "slagctl" do
 
   on_linux do
     on_intel do
-      sha256 "31835639e0773952835ab7b07af31bb391f6e64b108cfbba68bfae6903858a4e"
+      sha256 "7fe735f21085c2a07a876f0be39511fa068f739b631fff85a760070aaa58c436"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "c12cd0cea853d983abfb210b8f8ecce5ae895107b0c44eb14c3560a5dc52230c"
+      sha256 "4f9482c30cd8c2366ba8f2db3bc08528742bfa5235f2e119c49d5828216a9585"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
