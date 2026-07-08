@@ -38,16 +38,16 @@ cask "nbx" do
     end
   end
 
-  version "0.2.10"
+  version "0.2.11"
 
   on_macos do
     on_intel do
-      sha256 "66339cb71c2a8adfcefee364dc0faf300cc5d300c9fc3214dafe485911730f82"
+      sha256 "651c0f09f06e5765760dc787ec5e0bf6bbb5da972e34ee068cbcbe3d9dd078de"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "8435e8aad192a2f8d2e4ab0624cce2d03cabe5a10b6bbc8c2321320d5cdd917a"
+      sha256 "069e6a181b19f0c87cc14f1dfcd25e94238a3eec41fd4e372ba6b92922c55da6"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -55,12 +55,12 @@ cask "nbx" do
 
   on_linux do
     on_intel do
-      sha256 "ec5a8e94810cd2f5708fdbb30d661fb386d0b44eeecebeb4dca410a46e9e5f5d"
+      sha256 "b42b8c2c909e6a69bc780a8e72c7d3b34607f74bf2c11da7ad687af19e7a610a"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "999bb4ce059a4d54ae78a5f280012b6beae2802f1c16bf0a63755a5db7aec5a9"
+      sha256 "ddfa571fceeac7ba9a0778fac14cf1650018e485d2efc521cb5ccc32c278f41b"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -84,4 +84,8 @@ cask "nbx" do
 
   # No zap stanza required
 
+  caveats <<~EOS
+    To install the Claude Code skill (optional):
+      nbx skill install
+  EOS
 end
