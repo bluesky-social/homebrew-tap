@@ -38,16 +38,16 @@ cask "diderot" do
     end
   end
 
-  version "0.1.4"
+  version "0.1.5"
 
   on_macos do
     on_intel do
-      sha256 "2c2da4848223ac49ea78d0be8db10692bc377dce892d746254aeb71cceb50c7d"
+      sha256 "c24b3f704854c426d99d6fc50f11f901cef92178cd0d602f157535044a7ca480"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "d57496764c3ff61c4b2126118ef35a2baf56e3197ad6ab8797b77239c99e090d"
+      sha256 "deb45bc9e9499d68d4c44f2ba70787ff21f085fa224954fde902090675aaacb3"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -55,12 +55,12 @@ cask "diderot" do
 
   on_linux do
     on_intel do
-      sha256 "69abfe43bffa8630efe62684b97d30ec390e0d966beca9f387c853a78a29c1c0"
+      sha256 "1b2d846abbcbaf223fdc06d559d965334f2d16926c9cfe43e7f1a9f44f3375c4"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "d283f28270c96f1aafc32c74f102b58e8748178d0eababdc41eced598b63fc90"
+      sha256 "140aa12fa5de007b88bd21039db3c382d4cf092fab049f94f4a835fa1239369b"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -84,4 +84,9 @@ cask "diderot" do
 
   # No zap stanza required
 
+  caveats <<~EOS
+    To finish setup:
+      diderot auth login       # Authentik SSO
+      diderot skill install    # optional: Claude Code skill
+  EOS
 end
