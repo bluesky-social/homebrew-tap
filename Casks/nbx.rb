@@ -38,16 +38,16 @@ cask "nbx" do
     end
   end
 
-  version "0.2.14"
+  version "0.2.15"
 
   on_macos do
     on_intel do
-      sha256 "5d2279508899a5a6076678ebb6c7d4598d3260f613df6b146fe7a6d1f037921f"
+      sha256 "aef0966c62ba29aba7b773728ade86810de9bcd675097c3938103c8ebbc4c9cd"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "15c1e6295e16b7727cd002a06aa97986108ec36b7277e05f4e30029ff42560a3"
+      sha256 "c5bf7eded54abc544d84c2a52392c0e913b30793102dce98da40fbcca359a14c"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -55,12 +55,12 @@ cask "nbx" do
 
   on_linux do
     on_intel do
-      sha256 "341f7019aaad9fb8f4ada3fd3b051726c8ced237ef02cffc0a2f1453aaa78102"
+      sha256 "9f50a95700c91d50e3d2bdf4758b19aa58f5b91724f9bacf9cfc8caca285d3c1"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "c3a2fc1c025052c4cf8586cc33116d50ae19d807ad530a7b41e22d7dad55d667"
+      sha256 "a16a43670f22e2a6e1a5a6300266974e80d10762b243879f2a208c3205cd3847"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
