@@ -42,33 +42,33 @@ cask "lnx" do
 
   on_macos do
     on_intel do
-      sha256 "789fab587317e36110c0eaaed1501cf40bd8ebf58ef7ece105ca36aac9035f27"
-      url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_darwin_amd64.tar.gz",
+      sha256 "2abcaa36f417b37c9ba98515c4bfcbc921d64e32371105e42efbafa3821ddc0d"
+      url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "0a04bd09ab2ca86022ff8d08c8e9b496a12eccaaabd08448ad4c141af0573a3a"
-      url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_darwin_arm64.tar.gz",
+      sha256 "68deb60006ca10716497287375a8ba3cb1d1a36a9b624c44d3030b38c248608b"
+      url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
   end
 
   on_linux do
     on_intel do
-      sha256 "fe95f55f4295fe9a581c8c3a0487e864839601a1bfd43d35566dea89bd996dd3"
-      url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_linux_amd64.tar.gz",
+      sha256 "f95439598078167fcf85ad88c1a96110facd76de3df51c9ce362180466de878b"
+      url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "c1c4329118911730bfc5feecb68abe08d057a689f6814ddbfd89b612fb41bf2f"
-      url "https://github.com/bluesky-social/platform/releases/download/v#{version}/lnx_#{version}_linux_arm64.tar.gz",
+      sha256 "2ac3ee66449a2e779bb35ece95b639aa7ee6530e61e5e1a38876cc37537fbc8f"
+      url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
   end
 
   name "lnx"
   desc "Linear CLI: issues, projects, comments from the terminal"
-  homepage "https://github.com/bluesky-social/platform"
+  homepage "https://github.com/bluesky-social/lnx"
 
   livecheck do
     skip "Auto-generated on release."
