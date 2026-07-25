@@ -38,16 +38,16 @@ cask "diderot" do
     end
   end
 
-  version "0.1.12"
+  version "0.1.13"
 
   on_macos do
     on_intel do
-      sha256 "69f1c67fedb104908accb996971aa82d307ad10723d1b9d76c6b3bd4926090fc"
+      sha256 "6012d1bcd34ef746160f12497455cdb4e8b2c4be7e86d7c7c9613175f3d2c3da"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "46c9d5fd7de6dc9d191939a19f6bf256e66af0cc701e092265feb8137055a5fc"
+      sha256 "6627c358ea2bd2d5805b92f06fee10e84670f6ecc0748513eae2eed2bd5322c5"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -55,12 +55,12 @@ cask "diderot" do
 
   on_linux do
     on_intel do
-      sha256 "21fdf1945130b837fa38dc22badc3f8e53f797c9207d4e25308ec34fe4ca4253"
+      sha256 "b641790a42f2b6e6f294112a2d3c220631f7cb388711b9435214ceebc8e7651b"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
     on_arm do
-      sha256 "ba91dc6d460d1b6488e79c215282020068e5a2aa2ffd7cdc62e400fb247c4dc6"
+      sha256 "d5b0523ea2441397a760b443e7636d69a3a783be83674bfc4797c166f4364ec8"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
