@@ -23,7 +23,7 @@ cask "skipper" do
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
       end
-      unless quiet_system(gh, "auth", "status", "--hostname", "github.com")
+      unless SystemCommand.quiet_system(gh, "auth", "status", "--hostname", "github.com")
         raise CurlDownloadStrategyError,
               "gh is not authenticated; run: gh auth login"
       end
@@ -38,28 +38,28 @@ cask "skipper" do
     end
   end
 
-  version "0.2.48"
+  version "0.2.49"
 
   on_macos do
     on_arm do
-      sha256 "d87122eed69ebad73214abc613e9fefad77b96e53c136f9082cd1e2051c91957"
+      sha256 "fa1f4147fa5615c877b54a7971112e6e2d34202021a59209059b967400766690"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "835f66ed6183c47c6690ac1132164dccdf856a16e1232110b4919d391f1d237a"
+      sha256 "e77dd82d0ed61117dfd430d01b1284a372185bb435cb24cff26521128e0ea20b"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "c6adc36e39c6d4431214ee37a0050661812d486cccaddaaad6289a404164d783"
+      sha256 "98b831f48a95653112efb35ee9818479a907cee8f955cf8283d8616c5883504b"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "984f9878b54ed1bf1c2ad3c37a44ad18a47681a6b0dca081fbe1f9127d3787c1"
+      sha256 "93b88f2552e2421a1dc7ef72a51b08e552035cd097e8879ddd9e87bb7e60813a"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
