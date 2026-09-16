@@ -23,7 +23,7 @@ cask "gas" do
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
       end
-      unless quiet_system(gh, "auth", "status", "--hostname", "github.com")
+      unless SystemCommand.quiet_system(gh, "auth", "status", "--hostname", "github.com")
         raise CurlDownloadStrategyError,
               "gh is not authenticated; run: gh auth login"
       end
@@ -38,28 +38,28 @@ cask "gas" do
     end
   end
 
-  version "0.2.20"
+  version "0.2.21"
 
   on_macos do
     on_arm do
-      sha256 "72ba6b0e79c624e29d766339105df4a5de848285c011dc837d17eedbd0745fbd"
+      sha256 "279ad6a2653a94b068fe5c073920ee0792fcca0fbe2af2e003588f97022b74bd"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "ab60f01182077e5e0dc9a0b5940c252c2d4a699a1c14d94ee05b65d067518dbf"
+      sha256 "9de6208c8a6031f9fc41108b7b246fc4d5fad1b918b54ce9c378dbc382c16ea3"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "8d50f204175c3f044579e9b12a55eab24c0fcdabfe47de4c999c2dfff6c25917"
+      sha256 "27ceda9a3493f9934034cd619f8e87bbb6a11917b8e6e6dc21b5ecb78d49a0a5"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "256cd54068b3312af4f93d3f35302316b7a87ced6716f6640c294093e35514c7"
+      sha256 "b3140497e679d489ed5ded387c3d954f3b6d4ab5baae63d261c8dd51f659f62e"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
