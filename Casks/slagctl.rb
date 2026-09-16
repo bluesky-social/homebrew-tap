@@ -23,7 +23,7 @@ cask "slagctl" do
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
       end
-      unless quiet_system(gh, "auth", "status", "--hostname", "github.com")
+      unless SystemCommand.quiet_system(gh, "auth", "status", "--hostname", "github.com")
         raise CurlDownloadStrategyError,
               "gh is not authenticated; run: gh auth login"
       end
@@ -38,28 +38,28 @@ cask "slagctl" do
     end
   end
 
-  version "0.2.7"
+  version "0.2.8"
 
   on_macos do
     on_arm do
-      sha256 "3e67b31a21878b0dcf09f016388687857db142d37d53072174003cb4ba32b0c8"
+      sha256 "f78fd74bf143a6b09255682e66a17357b458e73f748cd03a66e86a707e7f2c26"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "61714f0f208334cde1efcb467149275c1efb87a75305644fbd8c6d49a4f9af3c"
+      sha256 "94a47499779d6f086da875f1cf74216c320c82405617cf68a8159d71aeb8e65e"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "b39a6cef9703927a24798a9f6b5c48fb82cd3faf2e14be53f43dab4271a10a4e"
+      sha256 "03958fc256d2bdf24c9e3fc24d79e75ac3e7e2bc564915e5a9ff334471f57826"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "6b81eae19de6680973cd3f85d0e89e4a09762a39edcfac74da0f40e26531140c"
+      sha256 "6fa5989853073ad5ed0074b70c8d41e53e130bac1474630e138406cd9164117e"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
