@@ -23,7 +23,7 @@ cask "diderot" do
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
       end
-      unless quiet_system(gh, "auth", "status", "--hostname", "github.com")
+      unless SystemCommand.quiet_system(gh, "auth", "status", "--hostname", "github.com")
         raise CurlDownloadStrategyError,
               "gh is not authenticated; run: gh auth login"
       end
@@ -38,28 +38,28 @@ cask "diderot" do
     end
   end
 
-  version "0.1.58"
+  version "0.1.59"
 
   on_macos do
     on_arm do
-      sha256 "bf19fb67301fc434bbbc7d42e31910b641cf0eb501ba464b4e967207a543aeb5"
+      sha256 "883536ffc2191ec0e1b17233944a77f7dc9f2f6c6b0587f2bc72fc1d97b91c32"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "a6aa31ec2ba5d597571a529cc2ffeba0a2d07b19d9be319473c4f85db08f777d"
+      sha256 "fb8df38486476d2138b3a1867ed2446e359072b865b2312f5c5b3923fa626319"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "6e343d0e48d065ac0b8083b27ebfb7b7b2f3423029403413ec44b12002571cac"
+      sha256 "80b366a3121f12bb9c40af47ecdb326c8c65acebb8e0aa9f9024003440c8bb91"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "de6708797704ffc5729c762eef7e179e53aeff356197ad48c7c70e2c72182a62"
+      sha256 "6d4b8f2ac3724fa17e4efe457a94adf0b6263aed0344a0f018b219e925b77bfe"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
