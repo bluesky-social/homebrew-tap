@@ -23,7 +23,7 @@ cask "nbx" do
         raise CurlDownloadStrategyError,
               "gh is required for private release downloads; run: brew install gh && gh auth login"
       end
-      unless quiet_system(gh, "auth", "status", "--hostname", "github.com")
+      unless SystemCommand.quiet_system(gh, "auth", "status", "--hostname", "github.com")
         raise CurlDownloadStrategyError,
               "gh is not authenticated; run: gh auth login"
       end
@@ -38,28 +38,28 @@ cask "nbx" do
     end
   end
 
-  version "0.2.20"
+  version "0.2.21"
 
   on_macos do
     on_arm do
-      sha256 "507c9aba9ec10f1918abefc745faf84f5c9c1a798b9769c7555d93d3a93768c1"
+      sha256 "01e60bce5afbc941d8cc2e3c7dc73f6ba8f15182ba34d61c4aa841da9908ef34"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "262c74d2c7bf2a145798bce91299291109fb0a80aeb15592a2f76c28235ec115"
+      sha256 "3c45befa416faa34a3e3b8ff80db0bb7e40672550186d425e5b4facbdc966db5"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "f30142de18d946a9a18c160d4cd4293d7987df7443d4c7d43f1fff177cb52f40"
+      sha256 "74c050ab84b4cf8c6d1d160fb02b39a8e64ff49ed7a0392159d3eb675051b9e5"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "467ef1c6f09f876c7163343cea3589eba2237f2a939b6c7ab42c78e1608a29a1"
+      sha256 "47bb8bd62dce64ca00e3366f789237f3a4ef18f368e11c88f7bf13c17bebba70"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
