@@ -38,36 +38,36 @@ cask "roast" do
     end
   end
 
-  version "1.0.14"
+  version "1.0.15"
 
   on_macos do
     on_arm do
-      sha256 "bbf7500efd94c55f156284b9a7ff126e9aee1ec0507e5b68bb5ee10a23d2943f"
-      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_darwin_arm64.tar.gz",
+      sha256 "fd47126be9093b116fb1d830fe0f0c68b2d315344bef5908f7bc1f8b29e50931"
+      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "5e3d4fb1d760a472b4921bb84241543b2c3c5fca12fc9ca1180f7995e4ae8083"
-      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_darwin_amd64.tar.gz",
+      sha256 "3a65c0864488496118db530d8370a3efde0b514cf0ebfeadd61d24c3ab6b52f7"
+      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "5753d0bbdd4be35def8bb3f26fff2abd104db6f99c88b6d5a1b0fb31fe83ede5"
-      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_linux_arm64.tar.gz",
+      sha256 "7b346b324dd0f3208ae7ba4fdb8990834a5c9d0a921f6ff6ea18fadfd5b8c908"
+      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "ba7394a231cae552d2f56b8d1fd7a7c6a0bf36d59a4a2eeb6e524c9e9f0587ff"
-      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_linux_amd64.tar.gz",
+      sha256 "c64e6d6fdcdfe967d9337a9c464b480daf88ff8915c2568af3e2ae1e3192e04c"
+      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
 
   name "roast"
   desc "Adversarial cross-model code review CLI"
-  homepage "https://github.com/bluesky-social/roast"
+  homepage "https://github.com/bluesky-social/roast-archive"
 
   livecheck do
     skip "Auto-generated on release."
