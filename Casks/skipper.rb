@@ -38,28 +38,28 @@ cask "skipper" do
     end
   end
 
-  version "0.2.57"
+  version "0.2.58"
 
   on_macos do
     on_arm do
-      sha256 "bf10a57b44b30024de0f4626f36cd494debee0ee3ca7a62f19daace45212dac4"
+      sha256 "0721d8650ef8de3f75f44461b85eb402c4dcf784430dcee7beb883ee29d7b58c"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "e57a37f0e36654410acd5f4be0c3858310da93804194ebdde339c6c02ea8453b"
+      sha256 "1cd1ce2122cf4fc1af53e00f54df0d5dd87a1b11be5c0f51abe97cb8cca43896"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "a49ca086edee09065507b568b89903e0adb2a8ffd6abc99dd9811c627d2240b0"
+      sha256 "4da6edea1ec62c5ac637c75ef5de3b034b1488e0d9381390979ee932c2cf545c"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "1e9fc350ad99425e7dbd4a02e404d6df383fa81cbb4962ad51476f31b845a0eb"
+      sha256 "84f8118ca8a3967fdd07653251c8ba8ad439cf5c9338d96d85be4c1a0941ad16"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
