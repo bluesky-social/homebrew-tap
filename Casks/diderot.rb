@@ -38,28 +38,37 @@ cask "diderot" do
     end
   end
 
-  version "0.1.61"
+  # Homebrew 7.0 deprecated `postflight`; GoReleaser still emits it from
+  # hooks.post.install (goreleaser/goreleaser#6873). Emit postflight_steps
+  # via custom_block until hooks.post.install_steps ships.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/diderot"]
+    end
+  end
+
+  version "0.1.62"
 
   on_macos do
     on_arm do
-      sha256 "c6ec788452c177e3997656e0a0af5f6c23e7f2f05db45f4ecb9e8132f5c07139"
+      sha256 "2beb56f6dfb878a46fb2f32257ac622643578eec140f7d34f1c9092a5ccfebad"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "c4a9631a26fb8b0d633ca63e1ca9de192cdb2dc3a88b5e0d62b2126fdb349380"
+      sha256 "2708030ef2df4f3bc575620103715d90db3e02bf2bafbbbb3680b4d65f68d797"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "d121cf92c5c73b27f44045ed89919f9ed05f1164ebec5fec6a5640b0199852f7"
+      sha256 "d64d7098ca418d66d58791d4c491ab07ac6a668fbd030cc0f01736fd0376aa61"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "6b0491b4ae11ad86d4aa4a1a07b60a8b8135053445ef20b84bc9e6281450fafc"
+      sha256 "4fbc41281cecff25108e11eb5dcb3a08dbb3a9a2e6b514b0de8e0f884fe9efb6"
       url "https://github.com/bluesky-social/diderot/releases/download/v#{version}/diderot_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -74,12 +83,6 @@ cask "diderot" do
   end
 
   binary "diderot"
-
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
 
   # No zap stanza required
 
