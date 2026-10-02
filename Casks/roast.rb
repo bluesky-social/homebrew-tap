@@ -3,7 +3,7 @@ cask "roast" do
   class GhReleaseStrategy < CurlDownloadStrategy
     def initialize(url, name, version, **meta)
       super
-      unless %r{^https://github\.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(.+)$} =~ @url
+      unless %r{\Ahttps://github\.com/([^/]+)/([^/]+)/releases/download/([^/]+)/([^/]+)\z} =~ @url
         raise CurlDownloadStrategyError, "unexpected release URL: #{@url}"
       end
       @gh_owner, @gh_repo, @gh_tag, @gh_asset =
@@ -13,9 +13,13 @@ cask "roast" do
     private
 
     def _fetch(url:, resolved_url:, timeout:)
-      # Brew sanitizes PATH during fetch but preserves the user's
-      # original PATH in HOMEBREW_PATH — search that first so gh is
-      # found wherever it's installed (brew, nix, ~/bin, ...).
+      # Public releases use Homebrew's normal download without requiring gh.
+      begin
+        return super
+      rescue ErrorDuringExecution
+        # Private releases return 404 anonymously; use the user's gh login.
+      end
+
       candidates = (ENV["HOMEBREW_PATH"] || "").split(":").map { |d| File.join(d, "gh") }
       candidates += ["#{HOMEBREW_PREFIX}/bin/gh", "/opt/homebrew/bin/gh", "/usr/local/bin/gh"]
       gh = candidates.find { |p| File.executable?(p) } || which("gh")&.to_s
@@ -38,36 +42,43 @@ cask "roast" do
     end
   end
 
-  version "1.0.15"
+  # GoReleaser's hooks still emit the deprecated postflight stanza.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "."], chdir: "."
+    end
+  end
+
+  version "1.1.0"
 
   on_macos do
     on_arm do
-      sha256 "fd47126be9093b116fb1d830fe0f0c68b2d315344bef5908f7bc1f8b29e50931"
-      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_darwin_arm64.tar.gz",
+      sha256 "ef39e8b27c6a4a7c155f5595c221919e6093d118dd3069a317417cdf2e28691d"
+      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "3a65c0864488496118db530d8370a3efde0b514cf0ebfeadd61d24c3ab6b52f7"
-      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_darwin_amd64.tar.gz",
+      sha256 "2aaeeb968422a75758245c554c39191ab83b1dd2b462a142f4e365035e8cf438"
+      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "7b346b324dd0f3208ae7ba4fdb8990834a5c9d0a921f6ff6ea18fadfd5b8c908"
-      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_linux_arm64.tar.gz",
+      sha256 "a6290c49ca6c7782d6e9b7c0adb53a691c9e97afe3d2a04e6efdc12eb1e1121b"
+      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "c64e6d6fdcdfe967d9337a9c464b480daf88ff8915c2568af3e2ae1e3192e04c"
-      url "https://github.com/bluesky-social/roast-archive/releases/download/v#{version}/roast_#{version}_linux_amd64.tar.gz",
+      sha256 "b33f433bcdc3982c3e227c715d983be2968ee55045524ccc981746cf6e38480b"
+      url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
 
   name "roast"
   desc "Adversarial cross-model code review CLI"
-  homepage "https://github.com/bluesky-social/roast-archive"
+  homepage "https://github.com/bluesky-social/roast"
 
   livecheck do
     skip "Auto-generated on release."
@@ -75,17 +86,14 @@ cask "roast" do
 
   binary "roast"
 
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
-
   # No zap stanza required
 
   caveats <<~EOS
-    To finish setup:
-      roast install            # Claude Code skill + commit-gate hook
-      roast login              # mint + store an AI-gateway key (mint.noclues.net)
+    Configure inference following the README, or use a trusted configuration URL:
+      roast config init --from <trusted-configuration-url>
+    Then check your setup and install the bundled Agent Skill:
+      roast doctor
+      roast skill install
+    The first interactive review offers to enable the pre-commit gate.
   EOS
 end
