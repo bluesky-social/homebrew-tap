@@ -38,28 +38,37 @@ cask "skipper" do
     end
   end
 
-  version "0.2.60"
+  # Homebrew 7.0 deprecated `postflight`; GoReleaser still emits it from
+  # hooks.post.install (goreleaser/goreleaser#6873). Emit postflight_steps
+  # via custom_block until hooks.post.install_steps ships.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/skipper"]
+    end
+  end
+
+  version "0.2.61"
 
   on_macos do
     on_arm do
-      sha256 "c7dafeb00c7d4abd2180138adedb001e778125d4453e10c81b4cc5c79661b0c0"
+      sha256 "7e84916ce30d13694966f5e3cc02cd0fd5d25263ffd3d5978194cbeddf5854e3"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "457c4917c31c4ef3db205ae77093c271284a73a909702d5a02acd6f58f0ce14f"
+      sha256 "a23bc06da3f180f26b1075a2eacec38e5c83dc40a7cd7cca31ce4658297c8a48"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "6b477142d1a1d64707b66cafbcc8cd8135c4e8792c8426dea6f3c4f0e93dd30d"
+      sha256 "3de38ebcd447f265897967322a7801975340d05afd9fe10399b7d0dd1731fa04"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "2ec04c5f90f5ba4dca70f48181b7fe5353ffaecb23d62596d5d8c3fb90e38d34"
+      sha256 "0507fda89a2bd647ba313946aef9dd9c18548417f0fa1d80b9bac15213f37195"
       url "https://github.com/bluesky-social/skipper/releases/download/v#{version}/skipper_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -74,12 +83,6 @@ cask "skipper" do
   end
 
   binary "skipper"
-
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
 
   # No zap stanza required
 end
