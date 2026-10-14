@@ -1,24 +1,24 @@
 # This file is generated from the public PCR release artifacts. Do not edit.
 cask "pcr" do
-  version "0.1.2"
+  version "0.1.3"
 
   on_macos do
     on_arm do
-      sha256 "531946eca04079c6efaebab27d533d0d15bf9a225dd401395278978a85bb04e0"
+      sha256 "9699c3eaad4e8ef55af156e2d4fd1dfa421ff9b2507245fe1de9e0771dbb11a6"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "8cfc20e1c06e62729c8c0886023a7eadcb68fe13ec398806cba1b84f468e5d18"
+      sha256 "b5eecdaf5bda0583483bb0651d58d229a1d3b59743f536130833dac94761d0e6"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "f647ddc082976960ff5a98f444aaf5e24681bf3651245a97bb731947269ed2f8"
+      sha256 "ee08b05da64d66ea015f5e5345796d072b1a6f4792af9cfd500c566fcb426eed"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
-      sha256 "9f31642dd764a79e3bc0fb3e4a703f39c818ac2cfaef8f7c6c42162791bbbd00"
+      sha256 "2bd985407f64ebd976f3af5f0b44e2b0d2b0e5b8570f1d0fc0db4a9e09d8b010"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_linux_amd64.tar.gz"
     end
   end
@@ -33,7 +33,11 @@ cask "pcr" do
 
   binary "pcr"
 
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", staged_path.to_s] if OS.mac?
+  # Homebrew 7.0 deprecated postflight (goreleaser/goreleaser#6873);
+  # emit the declarative postflight_steps stanza instead.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/pcr"]
+    end
   end
 end
