@@ -49,28 +49,28 @@ cask "roast" do
     end
   end
 
-  version "1.1.12"
+  version "1.1.13"
 
   on_macos do
     on_arm do
-      sha256 "032cf912c8fa33004be8d3c83b04c2598b6a1035c1a63f8fbbab725fcbbc71f7"
+      sha256 "f112f938dfda4e798a82654b36ba42103f424c904d3d96e91d5a49ab1cf383e9"
       url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "de209ed4224f3c998e98a25e7f914616c17c8a46cfc333412b63e9f0234bb10e"
+      sha256 "b68f484a183d1717b1c23c4890b4afa47f07d73913859003af60135104631366"
       url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "6a1d593711e9b2f4cf1e5770438309b635d633c8051dfea143c097a30c6762ce"
+      sha256 "00be0aae2f24098d6e61dd2cc660de59cfb9fdc16045408d0c666363fc7bb986"
       url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "1a0dedb03ff91785bfc198b829033324d889b304688995bf4943bbb69568bc6d"
+      sha256 "3fad003276260df35dbeb8424c59fcf7a08ed58aa6d5b810d64f47b048315f4c"
       url "https://github.com/bluesky-social/roast/releases/download/v#{version}/roast_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
