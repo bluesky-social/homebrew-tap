@@ -1,24 +1,24 @@
 # This file is generated from the public PCR release artifacts. Do not edit.
 cask "pcr" do
-  version "0.1.6"
+  version "0.1.7"
 
   on_macos do
     on_arm do
-      sha256 "9bd6d395f94a573ea0efdb55b6394a4b24b4bedf382a38a75201873d70f3fbc5"
+      sha256 "8973ffdc9497dff9ffb7aa2438f0ee3d6328ebd79471dabae882576fd9d516e7"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "d837955a5116fa4bd7262a2bbda27752d89313b8480a1b130ff2fb4b49f83a2d"
+      sha256 "45c96b03945d2b81126c66c83d9bddf76e92227769c9a4cc868dbbc38ae262e4"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "d49bef447eb35822c72fd66b9ed27a047b276b58fc84792d777ade946e1a1cb2"
+      sha256 "81bc103c19203b152fbf2d6b72f27835a8ee4225aec5ea45ab63528b5d5300fb"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
-      sha256 "3d7ee5cafb475f9fa02fea232183ead962d9efd4d5cc7736ce9a59304875b66f"
+      sha256 "f7fadbc113d0e3cb5424123f6d28078503c178d61eaf5f88732b55b6895ac1df"
       url "https://github.com/bluesky-social/pcr/releases/download/v#{version}/pcr_#{version}_linux_amd64.tar.gz"
     end
   end
