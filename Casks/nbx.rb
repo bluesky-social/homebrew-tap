@@ -38,28 +38,37 @@ cask "nbx" do
     end
   end
 
-  version "0.2.21"
+  # Homebrew 7.0 deprecated `postflight`; GoReleaser still emits it from
+  # hooks.post.install (goreleaser/goreleaser#6873). Emit postflight_steps
+  # via custom_block until hooks.post.install_steps ships.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/nbx"]
+    end
+  end
+
+  version "0.2.22"
 
   on_macos do
     on_arm do
-      sha256 "01e60bce5afbc941d8cc2e3c7dc73f6ba8f15182ba34d61c4aa841da9908ef34"
+      sha256 "899e103877ee1962dd0f541c8b67e007b832234a2e14232e41072b155d80fb6b"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "3c45befa416faa34a3e3b8ff80db0bb7e40672550186d425e5b4facbdc966db5"
+      sha256 "97e20dae05bee163fa03d4790b558b413e9ea15d48df001a1a2dda903318c73e"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "74c050ab84b4cf8c6d1d160fb02b39a8e64ff49ed7a0392159d3eb675051b9e5"
+      sha256 "0efa947d99e42c397233d89ba35593245c3a16e41a7d6a961d1a0d08aa4da01b"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "47bb8bd62dce64ca00e3366f789237f3a4ef18f368e11c88f7bf13c17bebba70"
+      sha256 "34ddaedf702e15e495e9cf75047b0aabf01c464534454a1a8da31fc9f8c426ee"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/nbx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -74,12 +83,6 @@ cask "nbx" do
   end
 
   binary "nbx"
-
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
 
   # No zap stanza required
 
