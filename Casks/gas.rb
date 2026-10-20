@@ -38,28 +38,37 @@ cask "gas" do
     end
   end
 
-  version "0.2.21"
+  # Homebrew 7.0 deprecated `postflight`; GoReleaser still emits it from
+  # hooks.post.install (goreleaser/goreleaser#6873). Emit postflight_steps
+  # via custom_block until hooks.post.install_steps ships.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/gas"]
+    end
+  end
+
+  version "0.2.22"
 
   on_macos do
     on_arm do
-      sha256 "279ad6a2653a94b068fe5c073920ee0792fcca0fbe2af2e003588f97022b74bd"
+      sha256 "ed45681926ed252f8a42e2d280c7ed9c6aa7350001ddf43119340004dbd52616"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "9de6208c8a6031f9fc41108b7b246fc4d5fad1b918b54ce9c378dbc382c16ea3"
+      sha256 "c95c8900a6feaf89bc2b66b4cf15bba3bdf0092bf2a156beb1b724e8e397150b"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "27ceda9a3493f9934034cd619f8e87bbb6a11917b8e6e6dc21b5ecb78d49a0a5"
+      sha256 "abba0a5f312cff5c2ed660f54c12f9b94425695a0b5d926109c05ea70cd171da"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "b3140497e679d489ed5ded387c3d954f3b6d4ab5baae63d261c8dd51f659f62e"
+      sha256 "c05fe38a7d1149bbb04d3e3ac581c20e1c2da7a8feb5f5893c533046c5504660"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -74,12 +83,6 @@ cask "gas" do
   end
 
   binary "gas"
-
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
 
   # No zap stanza required
 end
