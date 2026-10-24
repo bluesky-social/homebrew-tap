@@ -47,28 +47,28 @@ cask "gas" do
     end
   end
 
-  version "0.2.22"
+  version "0.2.23"
 
   on_macos do
     on_arm do
-      sha256 "ed45681926ed252f8a42e2d280c7ed9c6aa7350001ddf43119340004dbd52616"
+      sha256 "5957e466f04edc019cc9e6563bb3563bc19d37dc60e15fce08722ba7c26306bb"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "c95c8900a6feaf89bc2b66b4cf15bba3bdf0092bf2a156beb1b724e8e397150b"
+      sha256 "7f40990928c13f2e5e0120a8c27fc5a6189ccce79e429e92136fbd17eb0d44df"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "abba0a5f312cff5c2ed660f54c12f9b94425695a0b5d926109c05ea70cd171da"
+      sha256 "2bdaf6abb41d01e141cb51a4e47a72624b93d694539240dc561e0843630dbe02"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "c05fe38a7d1149bbb04d3e3ac581c20e1c2da7a8feb5f5893c533046c5504660"
+      sha256 "5c5d21316b252ae108d9996e6e0a7dc25bab886fd581d9510b515261ee4abb81"
       url "https://github.com/bluesky-social/platform/releases/download/v#{version}/gas_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
