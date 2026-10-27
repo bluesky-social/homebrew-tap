@@ -38,28 +38,37 @@ cask "slagctl" do
     end
   end
 
-  version "0.2.8"
+  # Homebrew 7.0 deprecated `postflight`; GoReleaser still emits it from
+  # hooks.post.install (goreleaser/goreleaser#6873). Emit postflight_steps
+  # via custom_block until hooks.post.install_steps ships.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/slagctl"]
+    end
+  end
+
+  version "0.2.9"
 
   on_macos do
     on_arm do
-      sha256 "f78fd74bf143a6b09255682e66a17357b458e73f748cd03a66e86a707e7f2c26"
+      sha256 "7aa089ef232f61dc7809c232dada4f813779491566539360435d5e78a6060ab9"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "94a47499779d6f086da875f1cf74216c320c82405617cf68a8159d71aeb8e65e"
+      sha256 "bbaca884ba775a33d5fd7dc993e8fc1f303d34295312f08deca70c9451b4320f"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "03958fc256d2bdf24c9e3fc24d79e75ac3e7e2bc564915e5a9ff334471f57826"
+      sha256 "66c2af7c42e68cce6dbf45954f96e951f563b4b73d03bd1ba6817079f1090179"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "6fa5989853073ad5ed0074b70c8d41e53e130bac1474630e138406cd9164117e"
+      sha256 "3ea3f41e73c8c5d9774b1676b441964575df1fadb86e8d01d07540e43cc6bdf0"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -74,12 +83,6 @@ cask "slagctl" do
   end
 
   binary "slagctl"
-
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
 
   # No zap stanza required
 end
