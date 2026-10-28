@@ -38,28 +38,37 @@ cask "lnx" do
     end
   end
 
-  version "0.2.18"
+  # Homebrew 7.0 deprecated `postflight`; GoReleaser still emits it from
+  # hooks.post.install (goreleaser/goreleaser#6873). Emit postflight_steps
+  # via custom_block until hooks.post.install_steps ships.
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/lnx"]
+    end
+  end
+
+  version "0.2.19"
 
   on_macos do
     on_arm do
-      sha256 "1ea149e5b29d14706e3e70053306baef4994909a4658fd9c74846a11256fb227"
+      sha256 "4fc111ac4c636aad496c9838d530c17985fdac317215df87db13a97d6a225562"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "32ac0d36c5cb37b5b6a628827a9f433f047efc653402a8fe9a57eb2735cee1ea"
+      sha256 "c680c94761f249a839d32c49a0d878f9e45dcd9ea1461a3690b1a1fbbf9e9c8e"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "0b484bae3fb51abfb657bf81af7a5a49ff40ec26935b5186d8fa0f960f24c4a9"
+      sha256 "02b56e653931eee469e53044bc59d1c5efcd676fec3b161bafc1e1be05da3b1c"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "50ce5eee2943ec71016d5698bcfe26e64b59e873fb640a1bb827bdde013de75b"
+      sha256 "fa90be57003e08825e1f0ff8ce25fbbc15627af451d118ce2d327f3114afae1c"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
@@ -74,12 +83,6 @@ cask "lnx" do
   end
 
   binary "lnx"
-
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}"]
-    end
-  end
 
   # No zap stanza required
 
