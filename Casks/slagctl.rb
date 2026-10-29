@@ -47,28 +47,28 @@ cask "slagctl" do
     end
   end
 
-  version "0.2.18"
+  version "0.2.19"
 
   on_macos do
     on_arm do
-      sha256 "d181e1adc369ec794eb317841c170c1caed087cf6752dfad074676cf4177e296"
+      sha256 "86e0ab81916ed260829fd9e505b7891c5bb12c76a8def2a3e528cf91c1d7927e"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "e49c745c469b23bc83ef5aa6ef22588ce1206efe4960dc793213487752a7586c"
+      sha256 "20bdb10a5f7914a1e2a4f4f0c0289d6acaf5d55bb4883dfdce972371b756689c"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "433ed3ef576a5fc5382eae602fa50fcb409501667edfb3c12c192d30ae005b2b"
+      sha256 "a0f7de7993611d116df1f95d117f99035780e1ee1d2b12b787a6aca937a48366"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "7e042b04f059c3f69b8d2964a3428b96a786097e3ee17a5d0afdeaa500bdcd4d"
+      sha256 "3aa55dcd789beb9292dfd3af21c9885913b056a676377691597ec1d933303f4a"
       url "https://github.com/bluesky-social/slagworks/releases/download/v#{version}/slagctl_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
