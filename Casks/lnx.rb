@@ -47,28 +47,28 @@ cask "lnx" do
     end
   end
 
-  version "0.2.20"
+  version "0.2.21"
 
   on_macos do
     on_arm do
-      sha256 "628fe3d15a94f74b935701d2415055215318bf2c1f408960e572fcfb840239ab"
+      sha256 "31f66b462ba52b6c32d99f1275ed61ab20a1799fa25dbfb94ae8ffdd04304374"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_darwin_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "22207470b6e2de4d083a175ee35dfece2b75ba17f55b8c2d7c91ef8c91920277"
+      sha256 "aa4a9073337a6cd6d2f5489e84b08fef1b889986ddeeeaa3ef00050ef6a46cf7"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_darwin_amd64.tar.gz",
         using: GhReleaseStrategy
     end
   end
   on_linux do
     on_arm do
-      sha256 "8b5ddcd667905273cfa37291d5d2e157a4aa4c46cf316594f4f0148e9159262a"
+      sha256 "7183dd8145e3bb843b43feefdd398320340314dada5dbcea90f8eb7bdefdd9d7"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_linux_arm64.tar.gz",
         using: GhReleaseStrategy
     end
     on_intel do
-      sha256 "1df58a620b0baec506e65b656cadd2b496854bc52048dca9730281f8c02a35d9"
+      sha256 "0fdbe22081ca8c2312cb24326002d2409ae20fc67da69f9292600fa3f3d2f775"
       url "https://github.com/bluesky-social/lnx/releases/download/v#{version}/lnx_#{version}_linux_amd64.tar.gz",
         using: GhReleaseStrategy
     end
