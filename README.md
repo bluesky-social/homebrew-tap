@@ -14,13 +14,14 @@ brew install --cask roast
 |---|---|---|
 | roast | Adversarial cross-model code review CLI | [bluesky-social/roast](https://github.com/bluesky-social/roast) |
 | pcr | CLI for the production change registry | [bluesky-social/pcr](https://github.com/bluesky-social/pcr) |
+| slagctl | CLI for the slagworks bare-metal provisioning system | [bluesky-social/slagworks](https://github.com/bluesky-social/slagworks) |
 
 Until the roast repository is public, installing roast needs `gh` signed in
 (`gh auth login`) with access to its releases.
 
 ## Internal tools moved
 
-`diderot`, `gas`, `lnx`, `nbx`, `skipper`, and `slagctl` moved to the private
+`diderot`, `gas`, `lnx`, `nbx`, and `skipper` moved to the private
 tap `bluesky-social/internal`, which needs `gh auth login` with access to the
 bluesky-social organization. `tap_migrations.json` points `brew update` at the
 new tap. To finish the move for an installed tool:
