@@ -20,7 +20,7 @@ Until the roast repository is public, installing roast needs `gh` signed in
 
 ## Internal tools moved
 
-`diderot`, `gas`, `lnx`, `nbx`, `skipper`, and `slagctl` moved to the private
+`gas`, `lnx`, `nbx`, `skipper`, and `slagctl` moved to the private
 tap `bluesky-social/internal`, which needs `gh auth login` with access to the
 bluesky-social organization. `tap_migrations.json` points `brew update` at the
 new tap. To finish the move for an installed tool:
