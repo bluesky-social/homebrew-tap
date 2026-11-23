@@ -10,23 +10,23 @@ class Diderot < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/bluesky-social/diderot/releases/download/v1.0.0/diderot_1.0.0_darwin_arm64.tar.gz"
-      sha256 "156d4a1bbd8bcff74ea45d7e197aaec9522461b92468a270b383ff44848253f7"
+      url "https://github.com/bluesky-social/diderot/releases/download/v1.1.0/diderot_1.1.0_darwin_arm64.tar.gz"
+      sha256 "1e3df507238821d3c36dde0bf0b03390fd1e0dd7d535d43cc3c7e0c0c17c304d"
     end
     on_intel do
-      url "https://github.com/bluesky-social/diderot/releases/download/v1.0.0/diderot_1.0.0_darwin_amd64.tar.gz"
-      sha256 "d81c3e13c45006b5876818643cd6caf55a64eb473b4fa576bd0a82efdb37aeb0"
+      url "https://github.com/bluesky-social/diderot/releases/download/v1.1.0/diderot_1.1.0_darwin_amd64.tar.gz"
+      sha256 "786e04ea977e0013625c6370ee87222861fb0a54ad0f9a51bb1cdcadbe8a0ec9"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/bluesky-social/diderot/releases/download/v1.0.0/diderot_1.0.0_linux_arm64.tar.gz"
-      sha256 "a5c2febe82d457f6cb9522197e7c404697cd4090b00a1b8fd3b7fd7c78ac769d"
+      url "https://github.com/bluesky-social/diderot/releases/download/v1.1.0/diderot_1.1.0_linux_arm64.tar.gz"
+      sha256 "f2e9f06f460001df54db3e4c125516436f7271ec1557035b8bc1407ab0923c79"
     end
     on_intel do
-      url "https://github.com/bluesky-social/diderot/releases/download/v1.0.0/diderot_1.0.0_linux_amd64.tar.gz"
-      sha256 "389dd42c3e942e7b00cf095420a7053f55365bac24173424faf485019b1a4fc1"
+      url "https://github.com/bluesky-social/diderot/releases/download/v1.1.0/diderot_1.1.0_linux_amd64.tar.gz"
+      sha256 "16db63c61ab662a263bf2b548487b46bf58687f1177f5737693bf97db9a83ef4"
     end
   end
 
